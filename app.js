@@ -39,9 +39,14 @@ function drawTeams(team) {
 }
 
 function balanceChange() {
-  const bankElem = document.getElementById(balance)
-  bankElem.innerText = bank
+  const bankElem = document.getElementById('balance')
+  bankElem.innerText = `$${bank}`
+  if (bank <= 0) {
+    bank = 100
+    alert = "OH NO! You totally beefed it on the bet. Try Again?"
+  }
 }
+
 
 function randomTeams() {
   const team = [1, 2]
@@ -81,6 +86,7 @@ function betTeam1() {
     bank -= 25
     window.alert("You lost $25😢")
   }
+  balanceChange()
   console.log(team1Skill);
   console.log(team2Skill);
   console.log(bank);
@@ -107,6 +113,7 @@ function betTeam2() {
     bank -= 25
     alert('You lost $25😢')
   }
+  balanceChange()
   console.log(team1Skill);
   console.log(team2Skill);
   console.log(bank);
@@ -115,9 +122,9 @@ function betTeam2() {
 }
 
 
+
 drawTeams(1)
 drawTeams(2)
-balanceChange()
 // SECTION functional code that is refactored into the func drawTeams()
 // drawTeam1()
 // drawTeam2()
