@@ -38,6 +38,11 @@ function drawTeams(team) {
   console.log('Teams Drafted');
 }
 
+function balanceChange() {
+  const bankElem = document.getElementById(balance)
+  bankElem.innerText = bank
+}
+
 function randomTeams() {
   const team = [1, 2]
   const randomTeam = Math.floor(Math.random() * team.length)
@@ -57,8 +62,62 @@ function shuffleTeams() {
 }
 
 
+function betTeam1() {
+  let team1Skill = 0;
+  let team2Skill = 0;
+  players.forEach((player) => {
+    if (player.teamNumber == 1) {
+      team1Skill += player.skill
+    };
+    if (player.teamNumber == 2) {
+      team2Skill += player.skill
+    }
+  })
+  if (team1Skill > team2Skill) {
+    bank += 25
+    window.alert("You won $25 😁")
+  }
+  if (team1Skill < team2Skill) {
+    bank -= 25
+    window.alert("You lost $25😢")
+  }
+  console.log(team1Skill);
+  console.log(team2Skill);
+  console.log(bank);
+  shuffleTeams()
+  return bank
+};
+
+function betTeam2() {
+  let team1Skill = 0
+  let team2Skill = 0
+  players.forEach((player) => {
+    if (player.teamNumber == 2) {
+      team2Skill += player.skill
+    };
+    if (player.teamNumber == 1) {
+      team1Skill += player.skill
+    }
+  })
+  if (team1Skill < team2Skill) {
+    bank += 25
+    alert('You won $25😁')
+  }
+  if (team1Skill > team2Skill) {
+    bank -= 25
+    alert('You lost $25😢')
+  }
+  console.log(team1Skill);
+  console.log(team2Skill);
+  console.log(bank);
+  shuffleTeams()
+  return bank
+}
+
+
 drawTeams(1)
 drawTeams(2)
+balanceChange()
 // SECTION functional code that is refactored into the func drawTeams()
 // drawTeam1()
 // drawTeam2()
