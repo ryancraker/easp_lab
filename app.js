@@ -25,32 +25,28 @@ const players = [
 // !SECTION
 
 function drawTeams(team) {
-  const teamElem = document.getElementById(team)
-  let teamContent = ''
+  const teamElem = document.getElementById(team);
+  let teamContent = '';
   for (let i = 0; i < players.length; i++) {
     const player = players[i];
     if (player.teamNumber == team) {
-      teamContent += player.emoji
-      console.log(player.emoji);
+      teamContent += player.emoji;
+      console.log(player.emoji)
     }
   }
-  teamElem.innerText = teamContent
-  console.log('Teams Drafted');
+  teamElem.innerText = teamContent;
+  console.log('Teams Drafted')
 }
 
 function balanceChange() {
-  const bankElem = document.getElementById('balance')
+  const bankElem = document.getElementById('balance');
   bankElem.innerText = `$${bank}`
-  if (bank <= 0) {
-    bank = 100
-    alert = "OH NO! You totally beefed it on the bet. Try Again?"
-  }
 }
 
 
 function randomTeams() {
-  const team = [1, 2]
-  const randomTeam = Math.floor(Math.random() * team.length)
+  const team = [1, 2];
+  const randomTeam = Math.floor(Math.random() * team.length);
   return team[randomTeam]
 }
 
@@ -58,73 +54,117 @@ function shuffleTeams() {
   console.log('Teams Shuffling....');
   for (let i = 0; i < players.length; i++) {
     const player = players[i];
-    const team = randomTeams()
+    const team = randomTeams();
     player.teamNumber = team
-  }
-  drawTeams(1)
-  drawTeams(2)
+  };
+  drawTeams(1);
+  drawTeams(2);
   console.log("Teams Drafted");
 }
 
 
-function betTeam1() {
-  let team1Skill = 0;
-  let team2Skill = 0;
-  players.forEach((player) => {
-    if (player.teamNumber == 1) {
-      team1Skill += player.skill
-    };
-    if (player.teamNumber == 2) {
-      team2Skill += player.skill
-    }
-  })
-  if (team1Skill > team2Skill) {
-    bank += 25
-    window.alert("You won $25 😁")
-  }
-  if (team1Skill < team2Skill) {
-    bank -= 25
-    window.alert("You lost $25😢")
-  }
-  balanceChange()
-  console.log(team1Skill);
-  console.log(team2Skill);
-  console.log(bank);
-  shuffleTeams()
-  return bank
-};
 
-function betTeam2() {
-  let team1Skill = 0
-  let team2Skill = 0
-  players.forEach((player) => {
-    if (player.teamNumber == 2) {
-      team2Skill += player.skill
-    };
-    if (player.teamNumber == 1) {
-      team1Skill += player.skill
+function betTeam(teamNumber, betAmount) {
+  let homeTeam = 0
+  let awayTeam = 0
+
+  players.forEach(player => {
+    if (player.teamNumber == teamNumber) {
+      homeTeam += player.skill
+    }
+    else {
+      awayTeam += player.skill
     }
   })
-  if (team1Skill < team2Skill) {
-    bank += 25
-    alert('You won $25😁')
+
+  if (homeTeam > awayTeam) {
+    bank += betAmount
   }
-  if (team1Skill > team2Skill) {
-    bank -= 25
-    alert('You lost $25😢')
+  else if (awayTeam > homeTeam) {
+    bank -= betAmount
   }
+
+  blowout()
   balanceChange()
-  console.log(team1Skill);
-  console.log(team2Skill);
+  console.log(homeTeam);
+  console.log(awayTeam);
   console.log(bank);
   shuffleTeams()
-  return bank
 }
 
+function blowout() {
+  if (bank > 0) {
+    return
+  };
+  const goAgain = window.confirm("OH NO! You totally beefed it on the bet. Try Again?")
+
+  if (goAgain == true) {
+    bank = 100;
+  }
+  else {
+    window.close()
+  }
+}
+
+drawTeams(1);
+drawTeams(2);
+// function betTeam1() {
+//   let team1Skill = 0
+//   let team2Skill = 0
+//   players.forEach(player); {
+//     if (player.teamNumber == 1) {
+//       team1Skill += player.skill
+//     }
+//     else {
+//       team2Skill += player.skill
+//     }
+//   }
+//   if (team1Skill > team2Skill) {
+//     bank += 25;
+//     window.alert("You won $25 😁")
+//   };
+//   if (team1Skill < team2Skill) {
+//     bank -= 25;
+//     window.alert("You lost $25😢");
+//   };
+//   balanceChange();
+//   console.log(team1Skill);
+//   console.log(team2Skill);
+//   console.log(bank);
+//   shuffleTeams();
+//   return bank
+// };
+
+// function betTeam2() {
+//   let team1Skill = 0;
+//   let team2Skill = 0;
+//   players.forEach((player) => {
+//     if (player.teamNumber == 2) {
+//       team2Skill += player.skill
+//     };
+//     if (player.teamNumber == 1) {
+//       team1Skill += player.skill
+//     }
+//   });
+//   if (team1Skill < team2Skill) {
+//     bank += 25;
+//     alert('You won $25😁')
+//   }
+//   if (team1Skill > team2Skill) {
+//     bank -= 25;
+//     blowout(bank)
+//     alert('You lost $25😢');
+//   };
+//   balanceChange();
+//   console.log(team1Skill);
+//   console.log(team2Skill);
+//   console.log(bank);
+//   shuffleTeams();
+//   return bank
+// }
 
 
-drawTeams(1)
-drawTeams(2)
+
 // SECTION functional code that is refactored into the func drawTeams()
 // drawTeam1()
 // drawTeam2()

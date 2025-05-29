@@ -20,16 +20,21 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <span id="1"></span>
+          <div id="1"></div>
+          <button onclick="betTeam(1,25)" type="button">Team 1 $25</button>
+          <button onclick="betTeam(1,50)" type="button">Team 1 $50</button>
+          <button onclick="betTeam(1,100)" type="button">Team 1 $100</button>
         </div>
         <div class="col-md-6">
-          <span id="2"></span>
+          <div id="2"></div>
+          <button onclick="betTeam(2,25)" type="button">Team 2 $25</button>
+          <button onclick="betTeam(2,50)" type="button">Team 2 $50</button>
+          <button onclick="betTeam(2,100)" type="button">Team 2 $100</button>
         </div>
       </div>
     </div>
     <button onclick="shuffleTeams()" type="button">shuffle teams</button>
-    <button onclick="betTeam1()" type="button">Team 1 Bet</button>
-    <button onclick="betTeam2()" type="button">Team 2 Bet</button>
+
   </main>
   <footer>made by super fly</footer>
   <script src="app.js"></script>
