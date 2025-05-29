@@ -9,3 +9,19 @@ body {
 main {
   flex-grow: 1;
 }
+
+#team-one {
+  background-color: rgba(76, 9, 109, 0.462);
+  border-radius: 10px;
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+#team-two {
+  background-color: rgba(9, 109, 71, 0.462);
+  border-radius: 10px;
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
